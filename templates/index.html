@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisar Imagens</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            width: 400px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            color: white;
+            width: 150px;
+        }
+        .btn-aprovar {
+            background-color: green;
+        }
+        .btn-rejeitar {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    {% if imagem %}
+        <div class="card">
+            <h2>Revisar Imagem</h2>
+            <img src="{{ url_for('servir_imagem', nome_imagem=imagem) }}" alt="Imagem">
+        </div>
+
+        <div class="buttons">
+            <form id="form-aprovar" action="/acao" method="POST">
+                <input type="hidden" name="imagem" value="{{ imagem }}">
+                <input type="hidden" name="acao" value="aprovar">
+                <button type="submit" class="btn-aprovar">✅ Aprovar (A)</button>
+            </form>
+
+            <form id="form-rejeitar" action="/acao" method="POST">
+                <input type="hidden" name="imagem" value="{{ imagem }}">
+                <input type="hidden" name="acao" value="rejeitar">
+                <button type="submit" class="btn-rejeitar">❌ Rejeitar (R)</button>
+            </form>
+        </div>
+
+        <script>
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "a" || event.key === "A") {
+                    document.getElementById("form-aprovar").submit();
+                } else if (event.key === "r" || event.key === "R") {
+                    document.getElementById("form-rejeitar").submit();
+                }
+            });
+        </script>
+    {% else %}
+        <h3>Todas as imagens foram revisadas!</h3>
+    {% endif %}
+</body>
+</html>
