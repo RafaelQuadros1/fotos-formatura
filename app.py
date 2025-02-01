@@ -9,7 +9,7 @@ DIRETORIO_BASE = os.path.dirname(os.path.abspath(__file__))
 
 # Configuração das pastas
 PASTA_IMAGENS = os.path.join(DIRETORIO_BASE, "fotinhas")
-PASTA_APROVADAS = os.path.join(DIRETORIO_BASE, "3p")
+PASTA_APROVADAS = os.path.join(DIRETORIO_BASE, "sua_turma")
 PASTA_REJEITADAS = os.path.join(DIRETORIO_BASE, "apagar")
 
 # Criar as pastas se não existirem
